@@ -1,33 +1,15 @@
 #include <iostream>
+#include <windows.h>
 using namespace std;
-void in(int *&arr,int &len,int see,int new_val){
-    int *new_arr = new int[len+1];
-    bool s = false;
-    for (int i = 0; i < len+1; i++){
-        if (i == see){
-            new_arr[i] = new_val;
-            s = true;
-        }
-        else{
-            if (s){
-                new_arr[i] = arr[i-1];
-            }
-            else{
-                new_arr[i] = arr[i];
-            }
-        }
+void typePrint(string text,int delay){
+    for (char ch : text){
+        cout<<ch;
+        cout.flush();
+        Sleep(delay);
     }
-    delete[] arr;
-    arr = new_arr;
-    len += 1;
 }
 int main(){
-    int len = 5;
-    int *arr = new int[len]{1,2,3,4,5};
-    in(arr,len,5,6);
-    for (int i = 0; i < len; i++){
-        cout<<"{"<<arr[i]<<"}";
-    }
-    delete[] arr;
+    typePrint("\033[0;95m#include \033[0;94m<iostream>\n\033[95musing \033[38;5;172mnamespace \033[0;92mstd;\n\033[38;5;208mint \033[95mmain\033[0m(){\n    \033[0mcout<<\033[38;5;111m\"Hello World\"\033[0m;\n    \033[95mreturn \033[0m0;\n}",10);
+    Sleep(2000);
     return 0;
 }
