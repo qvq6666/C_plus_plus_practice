@@ -5,7 +5,26 @@ void cout_arr(int *&arr,int len){
         cout<<"{"<<arr[i]<<"}";
     }
 }
-void in(int *&arr,int &len,int see,int new_val){
+void romove(int *&arr,int &len,int see){
+    int time = 0;
+    for (int i = 0; i < len; i++){
+        if (arr[i]==see){
+            time+=1;
+        }
+    }
+    int *new_arr = new int[len-time];
+    int new_arr_i = 0;
+    for (int arr_i = 0 ; arr_i < len; arr_i++){
+        if (arr[arr_i]!=see){
+            new_arr[new_arr_i] = arr[arr_i];
+            new_arr_i += 1;
+        }
+    }
+    delete[] arr;
+    arr = new_arr;
+    len -= time;
+}
+void insert(int *&arr,int &len,int see,int new_val){
     int *new_arr = new int[len+1];
     bool s = false;
     for (int i = 0; i < len+1; i++){
