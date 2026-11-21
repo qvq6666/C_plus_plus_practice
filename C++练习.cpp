@@ -55,13 +55,27 @@ void append(int *&arr,int &len,int new_val){
     arr = new_arr;
     len += 1;
 }
-int main(){
-    int len = 2;
-    int *arr = new int[len]{1,1};
-    for (int i = 2; i < 5; i++){
-        append(arr,len,arr[i-1]+arr[i-2]);
+int fib(int n){
+    if (n < 1){
+        return 0;
     }
-    cout_arr(arr,len);
-    delete[] arr;
+    else if (n <= 2){
+        return 1;
+    }
+    else{
+        int len = 2;
+        int *arr = new int[len]{1,1};
+        for (int i = 0; i < n; i++){
+            append(arr,len,arr[i-1]+arr[i-2]);
+            if (i+1 == n){
+                return arr[i];
+            }
+        }
+    }
+    return -1;
+}
+int main(){
+    int num = fib(16);
+    cout<<num;
     return 0;
 }
