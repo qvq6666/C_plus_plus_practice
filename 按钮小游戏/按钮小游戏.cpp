@@ -203,8 +203,8 @@ int main(){
         int titleCnt2 = sizeof(titleCode2)/sizeof(int);
         
         if (score>High_score){
-            DrawTextCodepoints(cnFontBig,titleCode2,titleCnt2,{250,500},100,2,YELLOW);
-            DrawText(TextFormat(":%d",score),400,518,85,YELLOW);
+            DrawTextCodepoints(cnFontBig,titleCode2,titleCnt2,{250,500},100,2,GOLD);
+            DrawText(TextFormat(":%d",score),400,518,85,GOLD);
         }
         else{
             DrawTextCodepoints(cnFontBig,titleCode2,titleCnt2,{250,500},100,2,BLACK);
