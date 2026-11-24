@@ -1,18 +1,21 @@
 #include <iostream>
+#include <string>
 using namespace std;
-void cout_arr(int *&arr,int len){
+template<typename temp>
+void cout_arr(temp *&arr,int len){
     for (int i = 0; i < len; i++){
         cout<<"{"<<arr[i]<<"}";
     }
 }
-void romove(int *&arr,int &len,int see){
+template<typename temp>
+void remove_val(temp *&arr,int &len,temp see){
     int time = 0;
     for (int i = 0; i < len; i++){
         if (arr[i]==see){
             time+=1;
         }
     }
-    int *new_arr = new int[len-time];
+    temp *new_arr = new temp[len-time];
     int new_arr_i = 0;
     for (int arr_i = 0 ; arr_i < len; arr_i++){
         if (arr[arr_i]!=see){
@@ -24,8 +27,12 @@ void romove(int *&arr,int &len,int see){
     arr = new_arr;
     len -= time;
 }
-void insert(int *&arr,int &len,int see,int new_val){
-    int *new_arr = new int[len+1];
+template<typename temp>
+bool insert(temp *&arr,int &len,int see,temp new_val){
+    if (see > len or see < 0){
+        return false;    
+    }
+    temp *new_arr = new temp[len+1];
     bool s = false;
     for (int i = 0; i < len+1; i++){
         if (i == see){
@@ -44,9 +51,11 @@ void insert(int *&arr,int &len,int see,int new_val){
     delete[] arr;
     arr = new_arr;
     len += 1;
+    return true;
 }
-void append(int *&arr,int &len,int new_val){
-    int *new_arr = new int[len+1];
+template<typename temp>
+void append(temp *&arr,int &len,temp new_val){
+    temp *new_arr = new temp[len+1];
     for (int i = 0; i < len; i++){
         new_arr[i] = arr[i];
     }
@@ -55,27 +64,14 @@ void append(int *&arr,int &len,int new_val){
     arr = new_arr;
     len += 1;
 }
-int fib(int n){
-    if (n < 1){
-        return 0;
-    }
-    else if (n <= 2){
-        return 1;
-    }
-    else{
-        int len = 2;
-        int *arr = new int[len]{1,1};
-        for (int i = 0; i < n; i++){
-            append(arr,len,arr[i-1]+arr[i-2]);
-            if (i+1 == n){
-                return arr[i];
-            }
-        }
-    }
-    return -1;
-}
 int main(){
-    int num = fib(16);
-    cout<<num;
+    int len = 2;
+    string *arr = new string[len]{"Hello"," "};
+    append(arr,len,string("World"));
+    insert(arr,len,3,string("!"));
+    append(arr,len,string("!"));
+    remove_val(arr,len,string("!"));
+    cout_arr(arr,len);
+    delete[] arr;
     return 0;
 }
