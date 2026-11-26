@@ -8,11 +8,13 @@ void cout_arr(temp *&arr,int len){
     }
 }
 template<typename temp>
-void remove_val(temp *&arr,int &len,temp see){
+bool remove_all(temp *&arr,int &len,temp see){
     int time = 0;
+    bool return_val = false;
     for (int i = 0; i < len; i++){
         if (arr[i]==see){
             time+=1;
+            return_val = true;
         }
     }
     temp *new_arr = new temp[len-time];
@@ -26,6 +28,27 @@ void remove_val(temp *&arr,int &len,temp see){
     delete[] arr;
     arr = new_arr;
     len -= time;
+    return return_val;
+}
+template<typename temp>
+bool remove_pos(temp *&arr,int &len,int pos){
+    if (pos > len or pos < 0){
+        return false;
+    }
+    else{
+        temp *new_arr = new temp[len-1];
+        int new_arr_i = 0;
+        for (int i = 0; i < len; i++){
+            if (i != pos){
+                new_arr[new_arr_i] = arr[i];
+                new_arr_i += 1;
+            }
+        }
+        delete[] arr;
+        arr = new_arr;
+        len -= 1;
+    }
+    return true;
 }
 template<typename temp>
 bool insert(temp *&arr,int &len,int see,temp new_val){
@@ -66,11 +89,8 @@ void append(temp *&arr,int &len,temp new_val){
 }
 int main(){
     int len = 2;
-    string *arr = new string[len]{"Hello"," "};
-    append(arr,len,string("World"));
-    insert(arr,len,3,string("!"));
-    append(arr,len,string("!"));
-    remove_val(arr,len,string("!"));
+    int *arr = new int[len]{2,1};
+    remove_pos(arr,len,1);
     cout_arr(arr,len);
     delete[] arr;
     return 0;
